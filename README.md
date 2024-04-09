@@ -1,2 +1,2 @@
-# -Networking-Integration
-As a professional seeking collaboration opportunities, I want to utilize the LinkedIn API in conjunction with either the GitHub API, So that I can connect with potential collaborators or mentors based on shared skills and interests.
+# Music Discovery with Lyrics
+As a music enthusiast, I want to use a Music Discovery App, So that I can search for songs or artists on Spotify, and retrieve lyrics from MusiXMatch.
