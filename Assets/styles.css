@@ -1,41 +1,34 @@
+
+/* Basic reset and base styles */
 body, html {
     margin: 0;
+    padding: 0;
     height: 100%;
+    box-sizing: border-box;
 }
 
 /* Border for all containers */
+#housing {
+    display: flex; /* Use flexbox layout */
+    height: calc(100% - 62px);
+    border: 1px solid black; 
+    width: 100%;
+}
+
 .block {
-    border: 3px solid black;
-    box-sizing: border-box; /* Include borders in height calculation */
+    flex: 1; /* Each column takes up equal space */
+    border: 1px solid black; /* Black border around each column */
+    padding: 20px;
 }
 
 /* Styling for command */
 #command {
-    height: 35px;
-    width: 100%;
-    color: #fff;
+    height: 40px; 
     text-align: center;
-    position: absolute;
+    border-top: 1px solid black; 
+    padding: 10px;
+    position: fixed; 
     bottom: 0;
-    border: solid black 3px;
-}
-
-/* Flexbox layout for housing */
-#housing {
-    display: flex;
-    flex-wrap: wrap;
-    height: calc(100% - 40px); /* Adjust height to fill remaining space */
-}
-
-/* Ensure blocks grow to fill available space */
-#leftBlock{
-    width: 25%;
-}
-
-#centerBlock{
-    width: 50%;
-}
-
-#rightBlock{
-    width: 25%
+    left: 0;
+    width: 100%; 
 }
