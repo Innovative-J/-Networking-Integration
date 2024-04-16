@@ -1,38 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
     <link rel="stylesheet" href="./Assets/styles.css">
+    <script src="https://kit.fontawesome.com/c14512c0cd.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
-   
-    <!--Housing for all but command-->
-    <div id="housing">
-       
-    
-        <!--Left Container--> 
-        <container id="leftBlock" class="block">
-        </container>
+    <!-- Main section -->
+    <section class="section m-0 pt-3 px-0 pb-0">
+        <!-- Full width container -->
+        <div class="container p-0">
+            <!-- Columns -->
+            <div class="columns is-flex">
+                
+                <!-- Left column -->
+                <div class="column is-one-quarter" id="columnL">
+                    <p>Lorem ipsum dolor</p>
+                </div>
+                
+                
+                <!-- Middle column -->
+                <div class="column is-one-half px-0 py-0 is-display-flex is-flex-direction-column">
+                    
+                    <!-- container for lyrics -->
+                    <section class="midCont is-flex-grow-1">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima, iure!</p>
+                    </section>
+                    
+                    <!-- container for player -->
+                    <section class="midCont is-flex-grow-1" id="musicBox">
+                        <div class="musicPlayer">
+                           
+                           <!-- buttons for player -->
+                            <nav class="mpNav">
+                                <div class="circle">
+                                    <i class="fa-solid fa-angle-left"></i>
+                                </div>
+                                <div class="circle">
+                                    <i class="fa-solid fa-bars"></i>
+                                </div>
+                            </nav>
 
+                            <!-- image for player -->
+                            <img src="./Assets/Images/music_thumbnail.jpeg" class="mpImg" alt="placeholder image for album art">
+                            
+                            <!-- song info -->
+                            <h1 class="mpArtist">Artist</h1>
+                            <p class="mpSongTitle">Song Title</p>
 
-        <!--Center Container-->
-        <container id="centerBlock" class="block">
-        </container>
+                            <!-- controls for player -->
+                            <audio id="mpSong">  
+                                <source src="./Assets/Media/Local Forecast - Elevator.mp3" type="audio/mpeg">
+                            </audio>
+                            <input type="range" value="0" id="mpProgress">
+                            
+                            <!-- back pause and next controls -->
+                            <div class="mpControls">
+                                <div><i class="fa-solid fa-backward"></i></div>
+                                <div onclick="playPause()"><i class="fa-solid fa-play" id="mpPlay"></i></div>
+                                <div><i class="fa-solid fa-forward"></i></div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
 
-
-        <!--Right Container-->
-        <container id="rightBlock" class="block">
-        </container>
-    </div>   
-        
-    
-    <!--footer / command bar-->
-    <container id="command">
-    </container>
-   
-    <!--JavaScript link-->
-    <script src="./Assets/script.js"></script>
+                <!-- Right column -->
+                <div class="column is-one-quarter">
+                    <p>Lorem ipsum dolor</p>
+                    <input class="input is-info" type="text" placeholder="Info input"/>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="./Assets/test.js"></script>
 </body>
 </html>
