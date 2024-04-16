@@ -23,7 +23,7 @@ function login () {
 /*When selecting a song, the app should retrieve and display lyrics from MusiXMatch, if available. Create a JS function to get 
 the lyrics from MusiXMatch using their API. If lyrics are not available, the site should indicate that they are not found. */
 
-//root URL https://api.musixmatch.com/ws/1.1/
+
 function getTrackId(track, artist) {
 
 const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&q_track=${encodeURIComponent(track)}&page_size=1&s_artist_rating=desc&apikey=${mApiKey}`; 
@@ -45,15 +45,11 @@ fetch (requestURL, {
     })*/
     .then (data => {
         const trackId = data.message.body.track_list[0].track.track_id;
-        console.log(data.message.body.track_list[0].track.track_id);
-        return trackId;
+        return getLyrics(trackId);
     });
-    return trackId;
 }
 
-getTrackId("physical", "dua lipa"); //used to test function 
-
-function getLyrics() {
+function getLyrics(trackId) {
 
 const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${mApiKey}`;
 
@@ -73,14 +69,16 @@ fetch (requestURL, {
         console.log(error.message);
     })*/
     .then (data => {
-        console.log(data.message.body.lyrics.lyrics_body);
+        const lyrics = data.message.body.lyrics.lyrics_body;
+        displayLyrics(lyrics);
     });
 }
 
 getLyrics("194285001"); //Test function
 
 function displayLyrics(lyrics) {
-    console.log(lyrics);
+    const bodyEl = document.getElementById('lyrics-text');
+    bodyEl.textContent = lyrics;
 
     //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 
@@ -93,28 +91,23 @@ function getAudio() {
 
 }
 
-/*Upon searching, the app should fetch and display relevant results from Spotify. Create a JavaScript function to retrieve 
-the song name and artist name.*/ 
-
-function getSongName() {
-
-}
-
-function getArtistName() {
-
-}
 
 //Handles search functionality
-async function handleSearch() {
+function handleSearch() {
     //take user input
-    const artistName = '';
-    const trackName= '';
+    const artistName = document.getElementById('search-artist').value;
+    const trackName= document.getElementById('search-song').value;
 
-    const trackId = await getTrackId(trackName, artistName);
-    const lyrics = await getLyrics(trackId);
-    displayLyrics(lyrics);
+    getTrackId(trackName, artistName);
+
+    //get audio
 
 }
+
+const searchButton = document.getElementById('search-button');
+searchButton.addEventListener('click', handleSearch);
+
+
 
 
 
