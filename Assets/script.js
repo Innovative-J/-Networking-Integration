@@ -201,4 +201,3 @@ searchButton.addEventListener('click', handleSearch);
         displayLyrics(lyrics);
 
     }
-}
