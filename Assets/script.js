@@ -201,3 +201,87 @@ searchButton.addEventListener('click', handleSearch);
         displayLyrics(lyrics);
 
     }
+
+// basic function variables
+let mpProgress = document.getElementById("mpProgress");
+let mpSong = document.getElementById("mpSong");
+let mpPlay = document.getElementById("mpPlay");
+let mpBack = document.getElementById("mpBack")
+let mpForward = document.getElementById("mpForward")
+
+// function for song slider
+mpSong.onloadedmetadata = function(){
+    mpProgress.max = mpSong.duration;
+    mpProgress.value = mpSong.currentTime;
+    console.log(mpSong.currentTime);
+}
+
+// pause play function
+function playPause() {
+    console.log('mpPlay:', mpPlay);
+    console.log('mpSong:', mpSong);
+    
+    if (mpPlay.classList.contains("fa-pause")) {
+        mpSong.pause();
+        mpPlay.classList.remove("fa-pause");
+        mpPlay.classList.add("fa-play");
+        console.log('Paused');
+    } else {
+        mpSong.play();
+        mpPlay.classList.add("fa-pause");
+        mpPlay.classList.remove("fa-play");
+        console.log('Playing');
+    }
+}
+
+
+// moving slider function
+if(mpSong.play()) {
+    setInterval(()=>{
+        mpProgress.value = mpSong.currentTime
+    },500);
+}
+
+mpProgress.onchange = function(){
+    mpSong.play();
+    mpSong.currentTime = mpProgress.value;
+    mpPlay.classList.add("fa-pause");
+    mpPlay.classList.remove("fa-play");
+}
+
+// fast forward function
+function fastForward() {
+    // Specify the amount of time to fast-forward in seconds
+    const fastForwardTime = 10; // Change the value to adjust how much to fast forward
+
+    // Calculate the new current time
+    const newCurrentTime = mpSong.currentTime + fastForwardTime;
+
+    // Ensure the new current time does not exceed the duration of the song
+    if (newCurrentTime < mpSong.duration) {
+        mpSong.currentTime = newCurrentTime;
+        mpProgress.value = newCurrentTime;
+    } else {
+        // If the new current time exceeds the duration, set it to the end of the song
+        mpSong.currentTime = mpSong.duration;
+        mpProgress.value = mpSong.duration;
+    }
+}
+
+// rewind function
+// Define the amount to rewind (e.g., 10 seconds)
+const rewindAmount = 10;
+
+// Function to rewind the audio
+function rewind() {
+    // Calculate the new current time by subtracting the rewind amount
+    let newTime = mpSong.currentTime - rewindAmount;
+    // Ensure the new time does not go below 0
+    if (newTime < 0) {
+        newTime = 0;
+    }
+    // Set the current time of the audio to the new time
+    mpSong.currentTime = newTime;
+    // Update the progress slider to match the new current time
+    mpProgress.value = mpSong.currentTime;
+}
