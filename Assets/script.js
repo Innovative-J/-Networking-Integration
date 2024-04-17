@@ -26,6 +26,8 @@ the lyrics from MusiXMatch using their API. If lyrics are not available, the sit
 
 function getTrackId(track, artist) {
 
+artistTopTracks(artist);
+
 const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&q_track=${encodeURIComponent(track)}&page_size=1&s_artist_rating=desc&apikey=${mApiKey}`; 
 
 fetch (requestURL, { 
@@ -39,10 +41,9 @@ fetch (requestURL, {
         }
         return response.json();
     })
-   /* .catch (error => {
-        console.log('You have an error dumbie');
+    .catch (error => {
         console.log(error.message);
-    })*/
+    })
     .then (data => {
         const trackId = data.message.body.track_list[0].track.track_id;
         return getLyrics(trackId);
@@ -64,24 +65,46 @@ fetch (requestURL, {
         }
         return response.json();
     })
-   /* .catch (error => {
-        console.log('You have an error dumbie');
+    .catch (error => {
         console.log(error.message);
-    })*/
+    })
     .then (data => {
         const lyrics = data.message.body.lyrics.lyrics_body;
         displayLyrics(lyrics);
     });
 }
 
-getLyrics("194285001"); //Test function
-
 function displayLyrics(lyrics) {
     const bodyEl = document.getElementById('lyrics-text');
-    bodyEl.textContent = lyrics;
+    bodyEl.innerHTML = lyrics;
 
     //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 
+}
+
+function artistTopTracks (artist) {
+    const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&page_size=5&apikey=${mApiKey}`; 
+
+    fetch (requestURL, { 
+        mode: 'cors',
+        method: 'GET',
+    })
+        .then (response => {
+            if (!response.ok) {
+                console.log(response); 
+                return;
+            }
+            return response.json();
+        })
+       .catch (error => {
+            console.log(error.message);
+        })
+        .then (data => {
+            const track = {};
+            const bodyEl = document.getElementById('top-tracks');
+            bodyEl.innerHTML = data;
+            console.log(data);
+        });
 }
 
 /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
