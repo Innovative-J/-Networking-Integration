@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
-    <link rel="stylesheet" href="./Assets/styles.css">
+    <link rel="stylesheet"  href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+    <link rel="stylesheet"  href="./Assets/styles.css">
     <script src="https://kit.fontawesome.com/c14512c0cd.js" crossorigin="anonymous"></script>
 </head>
 
@@ -19,7 +19,8 @@
                 
                 <!-- Left column -->
                 <div class="column is-one-quarter" id="columnL">
-                    <p>Lorem ipsum dolor</p>
+                    <p>Artist's Top 5 Tracks</p>
+                    <p id="top-tracks"></p>
                 </div>
                 
                 
@@ -28,7 +29,7 @@
                     
                     <!-- container for lyrics -->
                     <section class="midCont is-flex-grow-1">
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minima, iure!</p>
+                        <p id="lyrics-text"></p>
                     </section>
                     
                     <!-- container for player -->
@@ -70,12 +71,15 @@
 
                 <!-- Right column -->
                 <div class="column is-one-quarter">
-                    <p>Lorem ipsum dolor</p>
-                    <input class="input is-info" type="text" placeholder="Info input"/>
+                    <p>Find your </p>
+                    <input class="input is-info" id="search-artist" type="text" placeholder="Artist name"/>
+                    <input class="input is-info" id="search-song" type="text" placeholder="Song name"/>
+                    <input class="button" id="search-button" type="submit" value="Search" />
                 </div>
             </div>
         </div>
     </section>
-    <script src="./Assets/test.js"></script>
+    <script src="./Assets/script.js"></script>
+
 </body>
 </html>
