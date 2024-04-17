@@ -48,118 +48,120 @@ function login() {
 
 
 
-    // get artist
-    async function getArtist() {
-        const token = await getToken();
-        const search = 'artist:Drake';
-        console.log('token', token)
-        fetch(`https://api.spotify.com/v1/search?q=${search}&type=artist&local=en-US`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }).then(function (response) {
-            console.log('response', response.json())
-            return response.json()
-        }).then(function (data) {
-            console.log('data', data)
-            return data
-        })
-    }
-    getArtist()
+function getTrackId(track, artist) {
 
-    // create a form that retunts the 
-    // repeat the retuns and .then
+//artistTopTracks(artist);
 
+const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&q_track=${encodeURIComponent(track)}&page_size=1&s_artist_rating=desc&apikey=${mApiKey}`; 
 
+fetch (requestURL, { 
+    mode: 'cors',
+    method: 'GET',
+})
+    .then (response => {
+        if (!response.ok) {
+            console.log(response); 
+            return;
+        }
+        return response.json();
+    })
+    .catch (error => {
+        console.log(error.message);
+    })
+    .then (data => {
+        const trackId = data.message.body.track_list[0].track.track_id;
+        return getLyrics(trackId);
+    });
+}
 
-
-
-    // }
-
-    /*When selecting a song, the app should retrieve and display lyrics from MusiXMatch, if available. Create a JS function to get 
-    the lyrics from MusiXMatch using their API. If lyrics are not available, the site should indicate that they are not found. */
-
-    //root URL https://api.musixmatch.com/ws/1.1/
-    function getTrackId(track, artist) {
-
-        const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&q_track=${encodeURIComponent(track)}&page_size=1&s_artist_rating=desc&apikey=${mApiKey}`;
-
-        fetch(requestURL, {
-            mode: 'cors',
-            method: 'GET',
-        })
-            .then(response => {
-                if (!response.ok) {
-                    console.log(response);
-                    return;
-                }
-                return response.json();
-            })
-            /* .catch (error => {
-                 console.log('You have an error dumbie');
-                 console.log(error.message);
-             })*/
-            .then(data => {
-                const trackId = data.message.body.track_list[0].track.track_id;
-                console.log(data.message.body.track_list[0].track.track_id);
-                return trackId;
-            });
-        return trackId;
-    }
-
-    getTrackId("physical", "dua lipa"); //used to test function 
-
-    function getLyrics() {
+function getLyrics(trackId) {
 
         const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${mApiKey}`;
 
-        fetch(requestURL, {
-            mode: 'cors',
-            method: 'GET',
-        })
-            .then(response => {
-                if (!response.ok) {
-                    console.log(response);
-                    return;
-                }
-                return response.json();
-            })
-            /* .catch (error => {
-                 console.log('You have an error dumbie');
-                 console.log(error.message);
-             })*/
-            .then(data => {
-                console.log(data.message.body.lyrics.lyrics_body);
-            });
-    }
+fetch (requestURL, { 
+    mode: 'cors',
+    method: 'GET',
+})
+    .then (response => {
+        if (!response.ok) {
+            console.log(response); 
+            return;
+        }
+        return response.json();
+    })
+    .catch (error => {
+        console.log(error.message);
+    })
+    .then (data => {
+        const lyrics = data.message.body.lyrics.lyrics_body;
+        displayLyrics(lyrics);
+    });
+}
 
-    getLyrics("194285001"); //Test function
-
-    function displayLyrics(lyrics) {
-        console.log(lyrics);
+function displayLyrics(lyrics) {
+    const bodyEl = document.getElementById('lyrics-text');
+    bodyEl.innerHTML = lyrics;
 
         //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 
     }
 
-    /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
-    song audio from Spotify using their API.*/
+/*
+function artistTopTracks (artist) {
+    const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&page_size=5&apikey=${mApiKey}`; 
+
+    fetch (requestURL, { 
+        mode: 'cors',
+        method: 'GET',
+    })
+        .then (response => {
+            if (!response.ok) {
+                console.log(response); 
+                return;
+            }
+            return response.json();
+        })
+       .catch (error => {
+            console.log(error.message);
+        })
+        .then (data => {
+            const track = {
+                name: 'data.message.body.track_list[i].track_name',
+                song: '',
+                albumArt: ''
+            };
+            const bodyEl = document.getElementById('top-tracks');
+            bodyEl.innerHTML = data;
+            console.log(data);
+        });
+}*/
+
+/*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
+song audio from Spotify using their API.*/ 
 
     function getAudio() { }
 
     /*Upon searching, the app should fetch and display relevant results from Spotify. Create a JavaScript function to retrieve 
     the song name and artist name.*/
 
-    // Function to search for artists and songs using the Spotify API
-    function searchSpotify(query) {
-        // const accessToken = getToken();
 
-        // // Encode the query string
-        // const encodedQuery = encodeURIComponent(query);
+//Handles search functionality
+function handleSearch() {
+    //take user input
+    const artistName = document.getElementById('search-artist').value;
+    const trackName= document.getElementById('search-song').value;
 
-        // // Spotify API endpoint for searching artists and tracks
-        // const apiUrl = `https://api.spotify.com/v1/search?q=${encodedQuery}&type=artist,track`;
+    getTrackId(trackName, artistName);
+
+    //get audio
+
+}
+
+const searchButton = document.getElementById('search-button');
+searchButton.addEventListener('click', handleSearch);
+
+
+
 
         // // Fetch data from Spotify API
         // fetch(apiUrl, {
@@ -199,4 +201,3 @@ function login() {
         displayLyrics(lyrics);
 
     }
-}
