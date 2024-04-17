@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 console.log("hello world!");
 
 // spotify api
 
-=======
 const mApiKey = '363fa0717b84ce5037dd3d286985b633'; 
 
 
@@ -20,8 +18,7 @@ function getDataFromLocalStorage(key) {
 }
 
 //Function to take user input for login
-function login () {
->>>>>>> f27ae6b5a4d908b46589eeb599b68b302a78c392
+function login () {}
 
 async function getToken()  {
     console.log("Calling getToken!");
@@ -75,7 +72,7 @@ fetch(`https://api.spotify.com/v1/search?q=${search}&type=artist&local=en-US`, {
 }
  getArtist()
 
-// create a form that retunts the 
+// create a form that returns the values
 // repeat the retuns and .then
 
 
@@ -117,12 +114,10 @@ fetch (requestURL, {
 
 getTrackId("physical", "dua lipa"); //used to test function 
 
-<<<<<<< HEAD
 function getLyrics() {}
 
-function displayLyrics() {
+function displayLyrics() {}
   //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
-=======
 function getLyrics() {
 
 const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${mApiKey}`;
@@ -154,7 +149,6 @@ function displayLyrics(lyrics) {
 
     //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 
->>>>>>> f27ae6b5a4d908b46589eeb599b68b302a78c392
 }
 
 /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
@@ -198,9 +192,7 @@ function searchSpotify(query) {
     // });
 }
 
-<<<<<<< HEAD
 // Example usage:
-=======
 function getArtistName() {
 
 }
@@ -223,4 +215,3 @@ async function handleSearch() {
 
 
 
->>>>>>> f27ae6b5a4d908b46589eeb599b68b302a78c392
