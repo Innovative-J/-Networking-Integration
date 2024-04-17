@@ -1,7 +1,3 @@
-console.log("hello world!");
-
-// spotify api
-
 const mApiKey = '363fa0717b84ce5037dd3d286985b633'; 
 
 
@@ -72,7 +68,7 @@ fetch(`https://api.spotify.com/v1/search?q=${search}&type=artist&local=en-US`, {
 }
  getArtist()
 
-// create a form that returns the values
+// create a form that retunts the 
 // repeat the retuns and .then
 
 
@@ -116,7 +112,9 @@ getTrackId("physical", "dua lipa"); //used to test function
 
 function getLyrics() {}
 
-function displayLyrics() {}
+function displayLyrics() {
+    console.log(lyrics);
+}
   //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 function getLyrics() {
 
@@ -161,38 +159,9 @@ the song name and artist name.*/
 
 // Function to search for artists and songs using the Spotify API
 function searchSpotify(query) {
-    // const accessToken = getToken();
 
-    // // Encode the query string
-    // const encodedQuery = encodeURIComponent(query);
-
-    // // Spotify API endpoint for searching artists and tracks
-    // const apiUrl = `https://api.spotify.com/v1/search?q=${encodedQuery}&type=artist,track`;
-
-    // // Fetch data from Spotify API
-    // fetch(apiUrl, {
-    //     headers: {
-    //         'Authorization': `Bearer ${accessToken}`
-    //     }
-    // })
-    // .then(response => response.json())
-    // .then(data => {
-    //     console.log(data);
-    //     // Example: Display the first artist and track in the console
-    //     if (data.artists && data.artists.items.length > 0) {
-    //         console.log('Artist:', data.artists.items[0]);
-    //     }
-    //     if (data.tracks && data.tracks.items.length > 0) {
-    //         console.log('Track:', data.tracks.items[0]);
-    //     }
-    // })
-    // .catch(error => {
-    //     // displays an error message when fail to fetch
-    //     console.error('Error fetching data:', error);
-    // });
 }
 
-// Example usage:
 function getArtistName() {
 
 }
@@ -208,10 +177,3 @@ async function handleSearch() {
     displayLyrics(lyrics);
 
 }
-
-
-
-
-
-
-
