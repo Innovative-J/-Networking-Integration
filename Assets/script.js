@@ -101,9 +101,6 @@ fetch (requestURL, {
 function displayLyrics(lyrics) {
     const bodyEl = document.getElementById('lyrics-text');
     bodyEl.innerHTML = lyrics;
-
-        //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
-
     }
 
 /*
@@ -139,11 +136,7 @@ function artistTopTracks (artist) {
 /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
 song audio from Spotify using their API.*/ 
 
-    function getAudio() { }
-
-    /*Upon searching, the app should fetch and display relevant results from Spotify. Create a JavaScript function to retrieve 
-    the song name and artist name.*/
-
+function getAudio() { }
 
 //Handles search functionality
 function handleSearch() {
@@ -186,18 +179,3 @@ searchButton.addEventListener('click', handleSearch);
         // });
     }
 
-    function getArtistName() {
-
-    }
-
-    //Handles search functionality
-    async function handleSearch() {
-        //take user input
-        const artistName = '';
-        const trackName = '';
-
-        const trackId = await getTrackId(trackName, artistName);
-        const lyrics = await getLyrics(trackId);
-        displayLyrics(lyrics);
-
-    }
