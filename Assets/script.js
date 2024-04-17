@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-console.log("hello world!");
-
-// spotify api
-
-=======
 const mApiKey = '363fa0717b84ce5037dd3d286985b633'; 
 
 
@@ -21,7 +15,6 @@ function getDataFromLocalStorage(key) {
 
 //Function to take user input for login
 function login () {
->>>>>>> f27ae6b5a4d908b46589eeb599b68b302a78c392
 
 async function getToken()  {
     console.log("Calling getToken!");
