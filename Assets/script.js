@@ -26,7 +26,7 @@ the lyrics from MusiXMatch using their API. If lyrics are not available, the sit
 
 function getTrackId(track, artist) {
 
-artistTopTracks(artist);
+//artistTopTracks(artist);
 
 const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&q_track=${encodeURIComponent(track)}&page_size=1&s_artist_rating=desc&apikey=${mApiKey}`; 
 
@@ -82,8 +82,9 @@ function displayLyrics(lyrics) {
 
 }
 
+/*
 function artistTopTracks (artist) {
-    const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&page_size=5&apikey=${mApiKey}`; 
+    const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&page_size=5&apikey=${mApiKey}`; 
 
     fetch (requestURL, { 
         mode: 'cors',
@@ -100,12 +101,16 @@ function artistTopTracks (artist) {
             console.log(error.message);
         })
         .then (data => {
-            const track = {};
+            const track = {
+                name: 'data.message.body.track_list[i].track_name',
+                song: '',
+                albumArt: ''
+            };
             const bodyEl = document.getElementById('top-tracks');
             bodyEl.innerHTML = data;
             console.log(data);
         });
-}
+}*/
 
 /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
 song audio from Spotify using their API.*/ 
