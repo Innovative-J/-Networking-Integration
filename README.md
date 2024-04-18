@@ -32,7 +32,11 @@ To get started with the Music Discovery with Lyrics project, follow these steps 
 N/A
 
 ## API Reference
-Here's how you can use the API...
+![spotify api ss](./Assets/Images/spotifyapi.png)
+This code block initializes the Spotify Web Playback SDK, establishes a connection with the player, and defines event listeners for when the player is ready or not ready. Additionally, it includes logic to handle playing a track on the user's device using the Spotify API. The fetch function makes a PUT request to start playback on the user's device with a specific track URI.
+i also created a get token to get access to spotify, This code snippet defines a login() function responsible for obtaining an access token from the Spotify API using client credentials authentication. It includes an inner async function getToken() to handle the token retrieval process, constructing the necessary headers and making a POST request to the Spotify API. However, the getToken() function is defined but not utilized within the provided code snippet.
+
+![musixmatch api ss]()
 
 ## Examples
 1. Selecting a Song:
@@ -45,8 +49,8 @@ Here's how you can use the API...
 - Description: When a track is selected, the artist of said track and their top songs are displayed
 - Outcome: The tracks are listed in left sidebar allowing the user more opportunity for disocver new tracks
 ## Screenshots
-![Screenshot 1](screenshots/screenshot1.png)
-![Screenshot 2](screenshots/screenshot2.png)
+![Search Functionality](./Assets/Images/SearchSS.png)
+![Login Modal](./Assets/Images/ModalSS.png)
 
 ## Dependencies
 - Must have a Spotiy account to be able to login
