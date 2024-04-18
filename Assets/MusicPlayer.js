@@ -16,21 +16,28 @@ window.onSpotifyWebPlaybackSDKReady = async() => {
         console.log('Device ID has gone offline', device_id);
     });
 
-    // player.addListener('initialization_error', ({ message }) => {
-    //     console.error(message);
-    // });
+    // add button on play even listener
+    document.getElementById('togglePlay').onclick = function() {
+        player.togglePlay();
+      };
 
-    // player.addListener('authentication_error', ({ message }) => {
-    //     console.error(message);
-    // });
-
-    // player.addListener('account_error', ({ message }) => {
-    //     console.error(message);
-    // });
-
-    // document.getElementById('togglePlay').onclick = function() {
-    //   player.togglePlay();
-    // };
 
     player.connect();
 }
+
+const device_id = device_id;
+
+fetch("https://api.spotify.com/v1/me/player/play?device_id=" + device_id, {
+  method: "PUT",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer " + ${getToken}
+  },
+  body: JSON.stringify({
+    uris: ["spotify:track:5ya2gsaIhTkAuWYEMB0nw5"] 
+  })
+})
+.then(response => response.json())
+.then(data => {
+  console.log(data); 
+});

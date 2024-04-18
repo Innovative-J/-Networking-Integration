@@ -42,8 +42,8 @@ function login() {}
 
     }
 
-    //   getToken();
-
+    //   getting tracks
+ const getTracks = async (getToken, tracksEnd Point)
 
 
 
@@ -74,7 +74,7 @@ fetch (requestURL, {
     });
 }
 
-function getLyrics(trackId) {
+function getLyrics(trackId) {}
 
 function getLyrics() {}
 
@@ -149,28 +149,7 @@ searchButton.addEventListener('click', handleSearch);
 
 
 
-        // // Fetch data from Spotify API
-        // fetch(apiUrl, {
-        //     headers: {
-        //         'Authorization': `Bearer ${accessToken}`
-        //     }
-        // })
-        // .then(response => response.json())
-        // .then(data => {
-        //     console.log(data);
-        //     // Example: Display the first artist and track in the console
-        //     if (data.artists && data.artists.items.length > 0) {
-        //         console.log('Artist:', data.artists.items[0]);
-        //     }
-        //     if (data.tracks && data.tracks.items.length > 0) {
-        //         console.log('Track:', data.tracks.items[0]);
-        //     }
-        // })
-        // .catch(error => {
-        //     // displays an error message when fail to fetch
-        //     console.error('Error fetching data:', error);
-        // });
-    }
+    
 
     function getArtistName() {
 

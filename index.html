@@ -111,7 +111,11 @@
                             <!-- back pause and next controls -->
                             <div class="mpControls">
                                 <div onclick="rewind()"><i class="fa-solid fa-backward" id="mpBack"></i></div>
-                                <div onclick="playPause()"><i class="fa-solid fa-play" id="mpPlay"></i></div>
+                                <!-- created a buttton that can interagreated for the play button that is connected to spotify api (currently working on that music function) 
+                                -->
+                                  <!-- <button id="togglePlay">Toggle Play</button> -->
+
+                                <div onclick="playPause()" id="togglePlay"><i class="fa-solid fa-play" id="mpPlay"></i></div>
                                 <div onclick="fastForward()"><i class="fa-solid fa-forward" id="mpForward"></i></div>
                             </div>
                         </div>
