@@ -41,75 +41,72 @@ function login() {}
         });
 
     }
+}
 
     //   getting tracks
  const getTracks = async (getToken, tracksEnd Point)
 
 
 
+    //   getToken();
 
-function getTrackId(track, artist) {
 
-//artistTopTracks(artist);
+    function getTrackId(track, artist) {
 
-const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&q_track=${encodeURIComponent(track)}&page_size=1&s_artist_rating=desc&apikey=${mApiKey}`; 
+        const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&q_track=${encodeURIComponent(track)}&page_size=1&s_artist_rating=desc&apikey=${mApiKey}`;
 
-fetch (requestURL, { 
-    mode: 'cors',
-    method: 'GET',
-})
-    .then (response => {
-        if (!response.ok) {
-            console.log(response); 
-            return;
-        }
-        return response.json();
-    })
-    .catch (error => {
-        console.log(error.message);
-    })
-    .then (data => {
-        const trackId = data.message.body.track_list[0].track.track_id;
-        return getLyrics(trackId);
-    });
-}
+        fetch(requestURL, {
+            mode: 'cors',
+            method: 'GET',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    console.log(response);
+                    return;
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+            .then(data => {
+                const trackId = data.message.body.track_list[0].track.track_id;
+                return getLyrics(trackId);
+            });
+    }
 
-function getLyrics(trackId) {}
-
-function getLyrics() {}
-
-function displayLyrics() {
-    console.log(lyrics);
-}
-  //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
-function getLyrics() {
+    function getLyrics(trackId) {
 
 const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${mApiKey}`;
 
-fetch (requestURL, { 
-    mode: 'cors',
-    method: 'GET',
-})
-    .then (response => {
-        if (!response.ok) {
-            console.log(response); 
-            return;
-        }
-        return response.json();
-    })
-    .catch (error => {
-        console.log(error.message);
-    })
-    .then (data => {
-        const lyrics = data.message.body.lyrics.lyrics_body;
-        displayLyrics(lyrics);
-    });
-}
+        fetch(requestURL, {
+            mode: 'cors',
+            method: 'GET',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    console.log(response);
+                    return;
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.log(error.message);
+            })
+            .then(data => {
+                const lyrics = data.message.body.lyrics.lyrics_body;
+                displayLyrics(lyrics);
+            });
+    }
 
-function displayLyrics(lyrics) {
-    const bodyEl = document.getElementById('lyrics-text');
-    bodyEl.innerHTML = lyrics;
+    function displayLyrics(lyrics) {
+        const cleanedLyrics = lyrics.replace(/\(\d+\)/g, '');
+        const formattedLyrics = cleanedLyrics.replace(/\n/g, '<br>');
+        const bodyEl = document.getElementById('lyrics-text');
+        bodyEl.innerHTML = formattedLyrics;
 
+        bodyEl.style.fontSize = '12px';
+    }
         //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 
 }
@@ -117,35 +114,88 @@ function displayLyrics(lyrics) {
 /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
 song audio from Spotify using their API.*/ 
 
+    //Gets and displays artist top 5 tracks
+    function artistTopTracks (artist) {
+        const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&s_track_rating=desc&page_size=5&apikey=${mApiKey}`; 
+    
+        fetch (requestURL, { 
+            mode: 'cors',
+            method: 'GET',
+        })
+            .then (response => {
+                if (!response.ok) {
+                    console.log(response); 
+                    return;
+                }
+                return response.json();
+            })
+           .catch (error => {
+                console.log(error.message);
+            })
+            .then (data => {
+                const bodyEl = document.getElementById('top-tracks');
+                let tracksHTML = '';
+
+                for (let i = 0; i < 5; i++) {
+                    const topTrack = data.message.body.track_list[i].track.track_name;
+                    tracksHTML += `<p>${i+1}: ${topTrack}</p>`;
+                }
+                bodyEl.innerHTML = tracksHTML;
+            });
+    }
+/*
+    function musicPlayerHTML() {
+        const = document.getElementById('search-artist').value;
+        const = document.getElementById('search-artist').value;
+        bodyEl.innerHTML = lyrics;
+        bodyEl.innerHTML = lyrics;
+    }*/
+
+    /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
+    song audio from Spotify using their API.*/
+
      
 
-    /*Upon searching, the app should fetch and display relevant results from Spotify. Create a JavaScript function to retrieve 
-    the song name and artist name.*/
 
-// Function to search for artists and songs using the Spotify API
-function searchSpotify(query) {
+    //Handles search functionality
+    function handleSearch() {
+        //take user input
+        const artistName = document.getElementById('search-artist').value;
+        const trackName = document.getElementById('search-song').value;
 
-}
+        getTrackId(trackName, artistName);
 
-function getArtistName() {
+        artistTopTracks(artistName);
 
-}
+        //Stores search inputs into local storage
+        const searchData = {
+            artist: artistName,
+            song: trackName
+        };
+        storeDataInLocalStorage('mySearchData', searchData);
 
-//Handles search functionality
-function handleSearch() {
-    //take user input
-    const artistName = document.getElementById('search-artist').value;
-    const trackName= document.getElementById('search-song').value;
+        //get audio
 
-    getTrackId(trackName, artistName);
+    }
 
-    //get audio
+//Load search result from local storage on page load
+window.addEventListener('load', function () {
+    const searchData = getDataFromLocalStorage('mySearchData');
 
-}
+    if(searchData) {
+        const artistEl = document.getElementById('search-artist');
+        const trackEl = document.getElementById('search-song');
+
+        artistEl.value = searchData.artist;
+        trackEl.value = searchData.song;
+
+        this.localStorage.clear();
+    }
+});
+
 
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', handleSearch);
-
 
 
 
@@ -166,6 +216,27 @@ searchButton.addEventListener('click', handleSearch);
         displayLyrics(lyrics);
 
     }
+        // // Fetch data from Spotify API
+        // fetch(apiUrl, {
+        //     headers: {
+        //         'Authorization': `Bearer ${accessToken}`
+        //     }
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log(data);
+        //     // Example: Display the first artist and track in the console
+        //     if (data.artists && data.artists.items.length > 0) {
+        //         console.log('Artist:', data.artists.items[0]);
+        //     }
+        //     if (data.tracks && data.tracks.items.length > 0) {
+        //         console.log('Track:', data.tracks.items[0]);
+        //     }
+        // })
+        // .catch(error => {
+        //     // displays an error message when fail to fetch
+        //     console.error('Error fetching data:', error);
+        // });
 
 // basic function variables
 let mpProgress = document.getElementById("mpProgress");

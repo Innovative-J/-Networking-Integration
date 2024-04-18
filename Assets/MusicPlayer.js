@@ -32,7 +32,7 @@ fetch("https://api.spotify.com/v1/me/player/play?device_id=" + device_id, {
   headers: {
     "Content-Type": "application/json",
     "Authorization": "Bearer " + ${getToken}
-  },
+  }
   body: JSON.stringify({
     uris: ["spotify:track:5ya2gsaIhTkAuWYEMB0nw5"] 
   })
