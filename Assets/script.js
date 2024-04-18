@@ -37,7 +37,7 @@ function login() {}
             return response.json();
         }).then(function (data) {
             console.log("Data", data);
-            return result = data.access_token;
+            return data.access_token;
         });
 
     }
@@ -117,7 +117,7 @@ function displayLyrics(lyrics) {
 /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
 song audio from Spotify using their API.*/ 
 
-    function getAudio() { }
+     
 
     /*Upon searching, the app should fetch and display relevant results from Spotify. Create a JavaScript function to retrieve 
     the song name and artist name.*/
