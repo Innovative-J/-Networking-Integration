@@ -146,6 +146,7 @@ function login() {
 
     function getAudio() { }
 
+<<<<<<< HEAD
 
     //Handles search functionality
     function handleSearch() {
@@ -182,8 +183,16 @@ window.addEventListener('load', function () {
         this.localStorage.clear();
     }
 });
+=======
+>>>>>>> cf0bb8e4d53dd3924f7042b38116d0fa444d9376
 
+    //Handles search functionality
+    function handleSearch() {
+        //take user input
+        const artistName = document.getElementById('search-artist').value;
+        const trackName = document.getElementById('search-song').value;
 
+<<<<<<< HEAD
 async function searchSpotifyArtist(artistName, accessToken) {
     const apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist`;
     const headers = {
@@ -202,6 +211,38 @@ async function searchSpotifyArtist(artistName, accessToken) {
         return [];
     }
 }
+=======
+        getTrackId(trackName, artistName);
+
+        artistTopTracks(artistName);
+
+        //Stores search inputs into local storage
+        const searchData = {
+            artist: artistName,
+            song: trackName
+        };
+        storeDataInLocalStorage('mySearchData', searchData);
+
+        //get audio
+
+    }
+
+//Load search result from local storage on page load
+window.addEventListener('load', function () {
+    const searchData = getDataFromLocalStorage('mySearchData');
+
+    if(searchData) {
+        const artistEl = document.getElementById('search-artist');
+        const trackEl = document.getElementById('search-song');
+
+        artistEl.value = searchData.artist;
+        trackEl.value = searchData.song;
+
+        this.localStorage.clear();
+    }
+});
+
+>>>>>>> cf0bb8e4d53dd3924f7042b38116d0fa444d9376
 
 
 const searchButton = document.getElementById('search-button');
