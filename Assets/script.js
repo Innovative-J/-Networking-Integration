@@ -146,16 +146,54 @@ song audio from Spotify using their API.*/
 
 
 //Handles search functionality
-function handleSearch() {
-    //take user input
+async function handleSearch() {
+    // Take user input
     const artistName = document.getElementById('search-artist').value;
-    const trackName= document.getElementById('search-song').value;
+    const trackName = document.getElementById('search-song').value;
 
-    getTrackId(trackName, artistName);
+    // Get track ID from Musixmatch API
+    const trackId = await getTrackId(trackName, artistName);
+    // Get lyrics from Musixmatch API
+    const lyrics = await getLyrics(trackId);
+    // Display lyrics
+    displayLyrics(lyrics);
 
-    //get audio
+    // Search for top tracks of the artist using Musixmatch API
+    artistTopTracks(artistName);
 
+    // Get access token from Spotify API
+    const accessToken = await getToken();
+    // Search for artist details using Spotify API
+    const spotifyArtists = await searchSpotifyArtist(artistName, accessToken);
+    console.log('Spotify Artists:', spotifyArtists);
+
+    // Stores search inputs into local storage
+    const searchData = {
+        artist: artistName,
+        song: trackName
+    };
+    storeDataInLocalStorage('mySearchData', searchData);
 }
+
+async function searchSpotifyArtist(artistName, accessToken) {
+    const apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist`;
+    const headers = {
+        'Authorization': `Bearer ${accessToken}`
+    };
+
+    try {
+        const response = await fetch(apiUrl, { headers });
+        if (!response.ok) {
+            throw new Error('Failed to retrieve artist details from Spotify API');
+        }
+        const data = await response.json();
+        return data.artists.items;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+
 
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click', handleSearch);
