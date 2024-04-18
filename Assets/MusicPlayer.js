@@ -1,43 +1,52 @@
-window.onSpotifyWebPlaybackSDKReady = async() => {
-    const token = 'BQDwWpb49QYA0NLQC9uqgmMMNSRyntKBQLRX0hrEu8O7agLLUVkEiA2ngZT5YtT9vo1Vr6dU7n1UOJF_Notub1Q7JWMq3wRJF7HsrWxNAdh4MlSLtktuSgTIEs-nXG9BOcew5bKtc-Mj6qN8CE0T15hvf6_7VI-itOMyzduI79IkukviNksDMAa_ETAHLNPzYibNzivlOZBA';
-    const player = new Spotify.Player({
-        name: 'Web Playback SDK Quick Start Player',
-        getOAuthToken: cb => { cb(token); },
-        volume: 0.5
-    });
+window.onSpotifyWebPlaybackSDKReady = async () => {
+  const token = 'YOUR_SPOTIFY_ACCESS_TOKEN'; // Replace 'YOUR_SPOTIFY_ACCESS_TOKEN' with your actual access token
+  const player = new Spotify.Player({
+      name: 'Web Playback SDK Quick Start Player',
+      getOAuthToken: cb => { cb(token); },
+      volume: 0.5
+  });
 
-    // Ready
-    player.addListener('ready', ({ device_id }) => {
-        console.log('Ready with Device ID', device_id);
-    });
+  // Ready
+  player.addListener('ready', ({ device_id }) => {
+      console.log('Ready with Device ID', device_id);
 
-    // Not Ready
-    player.addListener('not_ready', ({ device_id }) => {
-        console.log('Device ID has gone offline', device_id);
-    });
+      // Connect to Spotify
+      player.connect().then(success => {
+          if (success) {
+              console.log('The Web Playback SDK successfully connected to Spotify!');
+              // Play a track (replace 'YOUR_DEVICE_ID' and 'YOUR_TRACK_URI' with actual values)
+              playTrack(device_id, 'YOUR_TRACK_URI');
+          }
+      });
+  });
 
-    // add button on play even listener
-    document.getElementById('togglePlay').onclick = function() {
-        player.togglePlay();
-      };
+  // Not Ready
+  player.addListener('not_ready', ({ device_id }) => {
+      console.log('Device ID has gone offline', device_id);
+  });
 
+  // Toggle play/pause button
+  document.getElementById('togglePlay').onclick = function () {
+      player.togglePlay();
+  };
+};
 
-    player.connect();
-}
-
-const device_id = device_id;
-
-fetch("https://api.spotify.com/v1/me/player/play?device_id=" + device_id, {
-  method: "PUT",
-  headers: {
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${getToken}` 
-  }, // Added comma here
-  body: JSON.stringify({
-    uris: ["spotify:track:5ya2gsaIhTkAuWYEMB0nw5"] 
+function playTrack(device_id, track_uri) {
+  fetch(`https://api.spotify.com/v1/me/player/play?device_id=${device_id}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` // Ensure 'token' variable is in scope
+      },
+      body: JSON.stringify({
+          uris: [track_uri]
+      })
   })
-})
-.then(response => response.json())
-.then(data => {
-  console.log(data); 
-});
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);
+      })
+      .catch(error => {
+          console.error('Error playing track:', error);
+      });
+}
