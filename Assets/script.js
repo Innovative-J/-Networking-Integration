@@ -100,39 +100,46 @@ function login() {
         const bodyEl = document.getElementById('lyrics-text');
         bodyEl.innerHTML = formattedLyrics;
 
-        bodyEl.style.fontSize = '12px';
+        bodyEl.style.fontSize = '18px';
+        bodyEl.style.color = 'black';
+        bodyEl.style.textAlign = 'center'
+        
     }
 
 
-    //Gets and displays artist top 5 tracks
-    function artistTopTracks (artist) {
-        const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&s_track_rating=desc&page_size=5&apikey=${mApiKey}`; 
-    
-        fetch (requestURL, { 
-            mode: 'cors',
-            method: 'GET',
+ //Gets and displays artist top 5 tracks
+ function artistTopTracks (artist) {
+    const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&s_track_rating=desc&page_size=5&apikey=${mApiKey}`; 
+
+    fetch (requestURL, { 
+        mode: 'cors',
+        method: 'GET',
+    })
+        .then (response => {
+            if (!response.ok) {
+                console.log(response); 
+                return;
+            }
+            return response.json();
         })
-            .then (response => {
-                if (!response.ok) {
-                    console.log(response); 
-                    return;
-                }
-                return response.json();
-            })
-           .catch (error => {
-                console.log(error.message);
-            })
-            .then (data => {
-                const bodyEl = document.getElementById('top-tracks');
-                let tracksHTML = '';
+       .catch (error => {
+            console.log(error.message);
+        })
+        .then (data => {
+            const bodyEl = document.getElementById('top-tracks');
+            bodyEl.style.backgroundColor = 'white';
+            bodyEl.style.fontSize = '20px';
+            bodyEl.style.borderRadius = '10px';
 
-                for (let i = 0; i < 5; i++) {
-                    const topTrack = data.message.body.track_list[i].track.track_name;
-                    tracksHTML += `<p>${i+1}: ${topTrack}</p>`;
-                }
-                bodyEl.innerHTML = tracksHTML;
-            });
-    }
+            let tracksHTML = '';
+
+            for (let i = 0; i < 5; i++) {
+                const topTrack = data.message.body.track_list[i].track.track_name;
+                tracksHTML += `<p>${i+1}: ${topTrack}</p><br>`;
+            }
+            bodyEl.innerHTML = tracksHTML;
+        });
+}  
 /*
     function musicPlayerHTML() {
         const = document.getElementById('search-artist').value;

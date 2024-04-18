@@ -15,26 +15,12 @@
         <div class="modal-background"></div>
         <div class="modal-content">
           <!-- form elements for modal -->
-            
-          <!-- username input -->
-          <div class="field">
-            <label class="label">Username</label>
-            <div class="control has-icons-left has-icons-right">
-              <input class="input is-success" type="text" placeholder="Text input" value="Username">
-              <span class="icon is-small is-left">
-                <i class="fas fa-user"></i>
-              </span>
-              <span class="icon is-small is-right">
-                <i class="fas fa-check"></i>
-              </span>
-            </div>
-          </div>
           
           <!-- email input -->
           <div class="field">
             <label class="label">Email</label>
             <div class="control has-icons-left has-icons-right">
-              <input class="input is-danger" type="email" placeholder="Email input" value="email@email.com">
+              <input class="input is-danger" type="email" placeholder="Email">
               <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
               </span>
@@ -43,6 +29,21 @@
               </span>
             </div>
             <p class="help is-danger">This email is invalid</p>
+          </div>
+
+          <!-- password input -->
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control has-icons-left has-icons-right">
+              <input class="input is-danger" type="password" placeholder="Password">
+              <span class="icon is-small is-left">
+                <i class="fas fa-lock"></i>
+              </span>
+              <span class="icon is-small is-right">
+                <i class="fas fa-exclamation-triangle"></i>
+              </span>
+            </div>
+            <p class="help is-danger">This password is invalid</p>
           </div>
           
           <!-- terms and conditions -->
@@ -60,9 +61,6 @@
             <div class="control">
               <button class="button is-link">Submit</button>
             </div>
-            <div class="control">
-              <button class="button is-link is-light">Cancel</button>
-            </div>
           </div>
         </div>
         <button class="modal-close is-large" aria-label="close"></button>
@@ -77,7 +75,8 @@
                 
                 <!-- Left column -->
                 <div class="column is-one-quarter" id="columnL">
-                    <p>Artist's Top 5 Tracks</p>
+                    <p id="top5">Artist's Top 5 Tracks</p>
+                    <br>
                     <p id="top-tracks"></p>
                 </div>
                 
@@ -119,7 +118,7 @@
 
                 <!-- Right column -->
                 <div class="column is-one-quarter">
-                    <p>Find your </p>
+                    <p id="findSong">Find Your Track</p>
                     <input class="input is-info" id="search-artist" type="text" placeholder="Artist name"/>
                     <input class="input is-info" id="search-song" type="text" placeholder="Song name"/>
                     <input class="button" id="search-button" type="submit" value="Search" />
