@@ -153,7 +153,6 @@ function login() {
 
     function getAudio() { }
 
-<<<<<<< HEAD
 
     //Handles search functionality
     function handleSearch() {
@@ -190,8 +189,6 @@ window.addEventListener('load', function () {
         this.localStorage.clear();
     }
 });
-=======
->>>>>>> cf0bb8e4d53dd3924f7042b38116d0fa444d9376
 
     //Handles search functionality
     function handleSearch() {
@@ -199,7 +196,6 @@ window.addEventListener('load', function () {
         const artistName = document.getElementById('search-artist').value;
         const trackName = document.getElementById('search-song').value;
 
-<<<<<<< HEAD
 async function searchSpotifyArtist(artistName, accessToken) {
     const apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist`;
     const headers = {
@@ -218,7 +214,6 @@ async function searchSpotifyArtist(artistName, accessToken) {
         return [];
     }
 }
-=======
         getTrackId(trackName, artistName);
 
         artistTopTracks(artistName);
@@ -249,7 +244,6 @@ window.addEventListener('load', function () {
     }
 });
 
->>>>>>> cf0bb8e4d53dd3924f7042b38116d0fa444d9376
 
 
 const searchButton = document.getElementById('search-button');
