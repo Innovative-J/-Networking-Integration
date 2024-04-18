@@ -41,10 +41,10 @@ function login() {}
         });
 
     }
-}
+
 
     //   getting tracks
- const getTracks = async (getToken, tracksEnd Point)
+//  const getTracks = async (getToken, tracksEnd Point);
 
 
 
@@ -109,7 +109,7 @@ const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=
     }
         //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 
-}
+
 
 /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
 song audio from Spotify using their API.*/ 
