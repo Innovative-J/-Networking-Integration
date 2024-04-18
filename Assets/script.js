@@ -105,7 +105,10 @@ const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=
         const bodyEl = document.getElementById('lyrics-text');
         bodyEl.innerHTML = formattedLyrics;
 
-        bodyEl.style.fontSize = '12px';
+        bodyEl.style.fontSize = '18px';
+        bodyEl.style.color = 'black';
+        bodyEl.style.textAlign = 'center'
+        
     }
         //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 
@@ -121,28 +124,39 @@ song audio from Spotify using their API.*/
         fetch (requestURL, { 
             mode: 'cors',
             method: 'GET',
-        })
-            .then (response => {
-                if (!response.ok) {
-                    console.log(response); 
-                    return;
-                }
-                return response.json();
-            })
-           .catch (error => {
-                console.log(error.message);
-            })
-            .then (data => {
-                const bodyEl = document.getElementById('top-tracks');
-                let tracksHTML = '';
+ //Gets and displays artist top 5 tracks
+ function artistTopTracks (artist) {
+    const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&s_track_rating=desc&page_size=5&apikey=${mApiKey}`; 
 
-                for (let i = 0; i < 5; i++) {
-                    const topTrack = data.message.body.track_list[i].track.track_name;
-                    tracksHTML += `<p>${i+1}: ${topTrack}</p>`;
-                }
-                bodyEl.innerHTML = tracksHTML;
-            });
-    }
+    fetch (requestURL, { 
+        mode: 'cors',
+        method: 'GET',
+    })
+        .then (response => {
+            if (!response.ok) {
+                console.log(response); 
+                return;
+            }
+            return response.json();
+        })
+       .catch (error => {
+            console.log(error.message);
+        })
+        .then (data => {
+            const bodyEl = document.getElementById('top-tracks');
+            bodyEl.style.backgroundColor = 'white';
+            bodyEl.style.fontSize = '20px';
+            bodyEl.style.borderRadius = '10px';
+
+            let tracksHTML = '';
+
+            for (let i = 0; i < 5; i++) {
+                const topTrack = data.message.body.track_list[i].track.track_name;
+                tracksHTML += `<p>${i+1}: ${topTrack}</p><br>`;
+            }
+            bodyEl.innerHTML = tracksHTML;
+        });
+}  
 /*
     function musicPlayerHTML() {
         const = document.getElementById('search-artist').value;
@@ -192,6 +206,61 @@ window.addEventListener('load', function () {
         this.localStorage.clear();
     }
 });
+
+    //Handles search functionality
+    function handleSearch() {
+        //take user input
+        const artistName = document.getElementById('search-artist').value;
+        const trackName = document.getElementById('search-song').value;
+
+async function searchSpotifyArtist(artistName, accessToken) {
+    const apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(artistName)}&type=artist`;
+    const headers = {
+        'Authorization': `Bearer ${accessToken}`
+    };
+
+    try {
+        const response = await fetch(apiUrl, { headers });
+        if (!response.ok) {
+            throw new Error('Failed to retrieve artist details from Spotify API');
+        }
+        const data = await response.json();
+        return data.artists.items;
+    } catch (error) {
+        console.error(error);
+        return [];
+    }
+}
+        getTrackId(trackName, artistName);
+
+        artistTopTracks(artistName);
+
+        //Stores search inputs into local storage
+        const searchData = {
+            artist: artistName,
+            song: trackName
+        };
+        storeDataInLocalStorage('mySearchData', searchData);
+
+        //get audio
+
+    }
+
+//Load search result from local storage on page load
+window.addEventListener('load', function () {
+    const searchData = getDataFromLocalStorage('mySearchData');
+
+    if(searchData) {
+        const artistEl = document.getElementById('search-artist');
+        const trackEl = document.getElementById('search-song');
+
+        artistEl.value = searchData.artist;
+        trackEl.value = searchData.song;
+
+        this.localStorage.clear();
+    }
+});
+
 
 
 const searchButton = document.getElementById('search-button');
