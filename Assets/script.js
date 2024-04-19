@@ -116,14 +116,6 @@ const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=
 
 /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
 song audio from Spotify using their API.*/ 
-
-    //Gets and displays artist top 5 tracks
-    function artistTopTracks (artist) {
-        const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&s_track_rating=desc&page_size=5&apikey=${mApiKey}`; 
-    
-        fetch (requestURL, { 
-            mode: 'cors',
-            method: 'GET',
  //Gets and displays artist top 5 tracks
  function artistTopTracks (artist) {
     const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&s_track_rating=desc&page_size=5&apikey=${mApiKey}`; 
