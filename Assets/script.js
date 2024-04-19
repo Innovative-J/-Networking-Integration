@@ -14,7 +14,7 @@ function getDataFromLocalStorage(key) {
 }
 
 //Function to take user input for login
-function login() {
+function login() {}
 
     async function getToken() {
         console.log("Calling getToken!");
@@ -37,11 +37,16 @@ function login() {
             return response.json();
         }).then(function (data) {
             console.log("Data", data);
-            return result = data.access_token;
+            return data.access_token;
         });
 
     }
-}
+
+
+    //   getting tracks
+//  const getTracks = async (getToken, tracksEnd Point);
+
+
 
     //   getToken();
 
@@ -72,7 +77,7 @@ function login() {
 
     function getLyrics(trackId) {
 
-        const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${mApiKey}`;
+const requestURL = `https://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${trackId}&apikey=${mApiKey}`;
 
         fetch(requestURL, {
             mode: 'cors',
@@ -105,8 +110,12 @@ function login() {
         bodyEl.style.textAlign = 'center'
         
     }
+        //if no lyrics then return "Sorry, we were unable to retrieve lyrics for this song."
 
 
+
+/*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
+song audio from Spotify using their API.*/ 
  //Gets and displays artist top 5 tracks
  function artistTopTracks (artist) {
     const requestURL = `https://api.musixmatch.com/ws/1.1/track.search?&q_artist=${encodeURIComponent(artist)}&s_artist_rating=desc&s_track_rating=desc&page_size=5&apikey=${mApiKey}`; 
@@ -151,7 +160,7 @@ function login() {
     /*The site should provide options to play the selected song on Spotify directly. Need to create function to gather Spotify 
     song audio from Spotify using their API.*/
 
-    function getAudio() { }
+     
 
 
     //Handles search functionality
@@ -251,6 +260,23 @@ searchButton.addEventListener('click', handleSearch);
 
 
 
+    
+
+    function getArtistName() {
+
+    }
+
+    //Handles search functionality
+    async function handleSearch() {
+        //take user input
+        const artistName = '';
+        const trackName = '';
+
+        const trackId = await getTrackId(trackName, artistName);
+        const lyrics = await getLyrics(trackId);
+        displayLyrics(lyrics);
+
+    }
         // // Fetch data from Spotify API
         // fetch(apiUrl, {
         //     headers: {

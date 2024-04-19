@@ -32,6 +32,7 @@ To get started, please follow the steps below
 N/A
 
 ## API Reference
+<<<<<<< HEAD
 ![Sporify Api SS](./Assets/Images/SpotifyAPISS.png)
 This code block initializes the Spotify Web Playback SDK, establishes a connection with the player, and defines event listeners for when the player is ready or not ready. Additionally, it includes logic to handle playing a track on the user's device using the Spotify API. The fetch function makes a PUT request to start playback on the user's device with a specific track URI.
 i also created a get token to get access to spotify, This code snippet defines a login() function responsible for obtaining an access token from the Spotify API using client credentials authentication. It includes an inner async function getToken() to handle the token retrieval process, constructing the necessary headers and making a POST request to the Spotify API. 
@@ -46,6 +47,13 @@ mode: 'cors'
 method: 'GET'
 Response must be in json
 3) An API key must be used to get back response details from the API calls. In order to get an API key with Musixmatch, you must go to their page (https://developer.musixmatch.com/) and sign up. From there, you will receive an email to activate your account. You will find the api key under Applications within the Dashboard.
+=======
+![spotify api ss](./Assets/Images/spotifyapi.png)
+This code block initializes the Spotify Web Playback SDK, establishes a connection with the player, and defines event listeners for when the player is ready or not ready. Additionally, it includes logic to handle playing a track on the user's device using the Spotify API. The fetch function makes a PUT request to start playback on the user's device with a specific track URI.
+i also created a get token to get access to spotify, This code snippet defines a login() function responsible for obtaining an access token from the Spotify API using client credentials authentication. It includes an inner async function getToken() to handle the token retrieval process, constructing the necessary headers and making a POST request to the Spotify API. However, the getToken() function is defined but not utilized within the provided code snippet.
+
+![musixmatch api ss]()
+>>>>>>> 88e77f0c43d29e85f3d63140fe654e38a1280b6a
 
 ## Examples
 1. Selecting a Song:
@@ -58,8 +66,13 @@ Response must be in json
 - Description: When a track is selected, the artist of said track and their top songs are displayed
 - Outcome: The tracks are listed in left sidebar allowing the user more opportunity for disocver new tracks
 ## Screenshots
+<<<<<<< HEAD
 ![Modal SS](./Assets/Images/ModalSS.png)
 ![Search SS](./Assets/Images/SearchSS.png)
+=======
+![Search Functionality](./Assets/Images/SearchSS.png)
+![Login Modal](./Assets/Images/ModalSS.png)
+>>>>>>> 88e77f0c43d29e85f3d63140fe654e38a1280b6a
 
 ## Dependencies
 - Must have a Spotiy account to be able to login
